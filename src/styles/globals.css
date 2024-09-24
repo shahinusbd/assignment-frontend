@@ -33,3 +33,7 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+.p-password-input.p-inputtext.p-component {
+  width: 100%;
+}
