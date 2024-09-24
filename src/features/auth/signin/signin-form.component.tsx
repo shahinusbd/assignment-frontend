@@ -1,4 +1,4 @@
-import { Form } from "formik";
+import { ErrorMessage, Field, FieldProps, Form } from "formik"; // Import Field and ErrorMessage from Formik
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
@@ -32,11 +32,20 @@ export function SignInForm() {
                 </span>
               </div>
               <div>
-                {" "}
-                <InputText
-                  className="p-inputtext-md py-2 mt-4 w-[526px] h-[60px]"
-                  id="email"
+                {/* Use Formik's Field component with the InputText */}
+                <Field name="email">
+                  {({ field }: { field: FieldProps["field"] }) => (
+                    <InputText
+                      {...field}
+                      className="p-inputtext-md py-2 mt-4 w-[526px] h-[60px]"
+                      id="email"
+                    />
+                  )}
+                </Field>
+                <ErrorMessage
                   name="email"
+                  component="div"
+                  className="text-red-600"
                 />
               </div>
             </div>
@@ -47,16 +56,24 @@ export function SignInForm() {
                 </span>
               </div>
               <div className="w-full">
-                {" "}
-                <Password
-                  className="mt-4 w-[526px] h-[60px]"
-                  id="password"
+                {/* Use Formik's Field component with the Password */}
+                <Field name="password">
+                  {({ field }: { field: FieldProps["field"] }) => (
+                    <Password
+                      {...field}
+                      className="mt-4 w-[526px] h-[60px]"
+                      id="password"
+                    />
+                  )}
+                </Field>
+                <ErrorMessage
                   name="password"
+                  component="div"
+                  className="text-red-600"
                 />
               </div>
             </div>
             <div className="pt-14">
-              {" "}
               <Button
                 type="submit"
                 label="Sign In"

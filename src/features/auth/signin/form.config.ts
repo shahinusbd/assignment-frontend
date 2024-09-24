@@ -1,4 +1,3 @@
-import { usePost } from "@/features/api";
 import * as yup from "yup";
 
 const requiredMessage = "${label} is required";
@@ -21,9 +20,3 @@ export interface SignInCreateResponse {
   message?: string;
   data?: null;
 }
-
-export type SignInCreateApiResponse = ReturnType<
-  typeof usePost<SignInCreate, SignInCreateResponse>
->;
-
-export type SignInCreateApiError = SignInCreateApiResponse["error"];
