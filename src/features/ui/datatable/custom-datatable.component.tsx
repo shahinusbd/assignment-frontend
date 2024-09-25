@@ -11,19 +11,21 @@ interface Product {
 
 interface Column {
   label: string;
-  field: keyof Product; // Ensure field is one of the keys from the Product interface
+  field: keyof Product;
 }
 
 interface CustomDataTableProps {
   data: Product[];
   columns: Column[];
   title: string;
+  onAddClick: () => void; // Add this line
 }
 
 export const CustomDataTable: React.FC<CustomDataTableProps> = ({
   data,
   columns,
   title,
+  onAddClick, // Destructure the new prop here
 }) => {
   return (
     <div className="p-6">
@@ -33,7 +35,10 @@ export const CustomDataTable: React.FC<CustomDataTableProps> = ({
 
         {/* Add Button */}
         <div className="mb-4 justify-items-end">
-          <button className="bg-blue-600 text-white px-4 py-2 rounded">
+          <button
+            className="bg-blue-600 text-white px-4 py-2 rounded"
+            onClick={onAddClick} // Use the handler here
+          >
             Add {title}
           </button>
         </div>

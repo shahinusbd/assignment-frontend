@@ -7,9 +7,10 @@ import { ProgressSpinner } from "primereact/progressspinner";
 import { Paginator } from "primereact/paginator";
 import { Dialog } from "primereact/dialog";
 import { InputText } from "primereact/inputtext";
-import { MaterialPurchase } from "../material-purchase/material-purchase.component";
+import { Formik } from "formik";
+import { MaterialPurchaseForm } from "./material-purchase-form.component";
 
-export const DashBoard = () => {
+export const MaterialPurchase = () => {
   const [products, setProducts] = useState<[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<any>(null);
@@ -77,8 +78,58 @@ export const DashBoard = () => {
 
   return (
     <div className="">
-      <Navbar />
-      <MaterialPurchase />
+      {loading ? (
+        <ProgressSpinner />
+      ) : (
+        <>
+          <CustomDataTable
+            data={products}
+            columns={columns as any}
+            title="Material Purchase"
+            onAddClick={handleAddClick} // Pass the handler here
+          />
+
+          <Paginator
+            first={(currentPage - 1) * rowsPerPage}
+            rows={rowsPerPage}
+            totalRecords={totalRecords}
+            onPageChange={onPageChange}
+          />
+        </>
+      )}
+      <Dialog
+        visible={modal}
+        onHide={() => {
+          if (!modal) return;
+          setModal(false);
+        }}
+        modal={true}
+        header="Add Material Purchase"
+        headerStyle={{
+          backgroundColor: "#2563EB",
+          color: "#FFFFFF",
+          textAlign: "center",
+        }}
+        style={{ width: "60vw" }}
+      >
+        <Formik
+          initialValues={{
+            item: "",
+            store: "",
+            runner: "",
+            amount: "",
+            cardNo: "",
+            date: "",
+          }}
+          onSubmit={(values) => {
+            console.log(values);
+          }}
+
+          // Add validation rules and handle form submission here
+        >
+          <MaterialPurchaseForm />
+        </Formik>
+      </Dialog>
     </div>
   );
 };
