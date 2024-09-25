@@ -110,7 +110,7 @@ export const MaterialPurchase = () => {
           color: "#FFFFFF",
           textAlign: "center",
         }}
-        style={{ width: "60vw" }}
+        style={{ width: "70vw" }}
       >
         <Formik
           initialValues={{
@@ -124,8 +124,6 @@ export const MaterialPurchase = () => {
           onSubmit={(values) => {
             console.log(values);
           }}
-
-          // Add validation rules and handle form submission here
         >
           <MaterialPurchaseForm />
         </Formik>

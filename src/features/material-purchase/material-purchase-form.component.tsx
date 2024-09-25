@@ -152,27 +152,31 @@ export const MaterialPurchaseForm = () => {
               </td>
             </tr>
           ))}
-          <div className="justify-end">
-            <FaCirclePlus
-              onClick={addRow}
-              style={{
-                height: 30,
-                width: 30,
-                cursor: "pointer",
-                backgroundColor: "#F7F9FC",
-                borderRadius: "50%",
-                border: "1px solid #E2E8F0",
-                color: "#2563EB",
-              }}
-            />
-          </div>
         </tbody>
       </table>
-
-      <Button
-        label="Save"
-        className="justify-end mt-6 bg-[#2563EB] text-white"
-      />
+      <div className="flex justify-end rounded shadow-lg">
+        <FaCirclePlus
+          onClick={addRow}
+          style={{
+            height: "26.63px",
+            width: "26.63px",
+            cursor: "pointer",
+            backgroundColor: "#F7F9FC",
+            borderRadius: "50%",
+            border: "1px solid #E2E8F0",
+            color: "#2563EB",
+            marginRight: 10,
+            marginBottom: 10,
+          }}
+        />
+      </div>
+      <div className="flex justify-end">
+        {" "}
+        <Button
+          label="Save"
+          className="mt-3 bg-[#2563EB] text-white w-[113px] h-[46px]"
+        />
+      </div>
     </Form>
   );
 };

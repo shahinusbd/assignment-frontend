@@ -31,12 +31,12 @@ export const CustomDataTable: React.FC<CustomDataTableProps> = ({
     <div className="p-6">
       <div className="flex justify-between">
         {/* Title */}
-        <div className="text-3xl font-bold text-blue-600 mb-4">{title}</div>
+        <div className="text-3xl font-bold text-[#2563EB] mb-4">{title}</div>
 
         {/* Add Button */}
         <div className="mb-4 justify-items-end">
           <button
-            className="bg-blue-600 text-white px-4 py-2 rounded"
+            className="bg-[#2563EB] text-white px-4 py-2 rounded h-11"
             onClick={onAddClick} // Use the handler here
           >
             Add {title}
@@ -48,7 +48,7 @@ export const CustomDataTable: React.FC<CustomDataTableProps> = ({
       <div className="overflow-x-auto">
         <table className="table-auto w-full text-left border-collapse">
           <thead>
-            <tr className="bg-blue-200">
+            <tr className="bg-[#2563EB99] text-[#FFFFFF]">
               {columns.map((column, index) => (
                 <th key={index} className="p-3 border">
                   {column.label}
