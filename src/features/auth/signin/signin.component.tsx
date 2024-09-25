@@ -21,7 +21,7 @@ export const SignIn = () => {
   ) => {
     try {
       // Send a POST request to the login endpoint
-      const response = await axios.post<SignInCreateResponse>(
+      const response = await axios.post<any>(
         "https://devapi.propsoft.ai/api/interview/login",
         values
       );
@@ -29,9 +29,9 @@ export const SignIn = () => {
       console.log("response: " + JSON.stringify(response));
 
       // Check if the response has an accessToken and redirect to the dashboard
-      if (response.data) {
-        localStorage.setItem("accessToken", response.data.accessToken);
-        localStorage.setItem("refreshToken", response.data.refreshToken);
+      if (response?.data) {
+        localStorage.setItem("access_token", response?.data.access_token);
+        localStorage.setItem("email", response?.data?.user_data?.email);
 
         // Redirect to the dashboard page
         push("/dashboard");
@@ -40,8 +40,8 @@ export const SignIn = () => {
       }
     } catch (error: any) {
       // Handle API errors
-      if (error.response?.data?.message) {
-        toast.error(error.response.data.message);
+      if (error.response?.data?.status_message) {
+        toast.error(error.response.data.status_message);
       } else {
         toast.error("An error occurred. Please try again.");
       }
