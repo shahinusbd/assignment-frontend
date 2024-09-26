@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 import { CustomDataTable } from "../ui/datatable/custom-datatable.component";
 import { InitialValue, MaterialPurchaseCreateSchema } from "./form.config";
 import { MaterialPurchaseForm } from "./material-purchase-form.component";
+
 export const MaterialPurchase = () => {
   const [products, setProducts] = useState<[]>([]);
   const [loading, setLoading] = useState<boolean>(true);

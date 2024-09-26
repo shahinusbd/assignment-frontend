@@ -3,7 +3,11 @@ import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
 
-export function SignInForm() {
+interface SignInCreate {
+  loading: boolean;
+}
+
+export function SignInForm({ loading }: SignInCreate) {
   return (
     <div className="grid grid-cols-2">
       <div className="bg-[#2563EB] w-[80%] h-full">
@@ -76,6 +80,7 @@ export function SignInForm() {
                 type="submit"
                 label="Sign In"
                 className="w-[160px] h-[55px] bg-blue-600 text-white"
+                loading={loading}
               />
             </div>
           </div>

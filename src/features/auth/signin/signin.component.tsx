@@ -2,12 +2,14 @@ import { Formik, FormikHelpers } from "formik";
 
 import axios from "axios";
 import { useRouter } from "next/router";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import { InitialValue, SignInCreate, SignInFormSchema } from "./form.config";
 import { SignInForm } from "./signin-form.component";
 
 export const SignIn = () => {
   const { push } = useRouter();
+  const [loading, setLoading] = useState<boolean>(false);
 
   // Function to handle form submission
   const handleSubmit = async (
@@ -15,6 +17,7 @@ export const SignIn = () => {
     { setSubmitting, setErrors }: FormikHelpers<SignInCreate>
   ) => {
     try {
+      setLoading(true); // Start the submit spinner/loading state
       // Send a POST request to the login endpoint
       const response = await axios.post<any>(
         "https://devapi.propsoft.ai/api/interview/login",
@@ -46,7 +49,7 @@ export const SignIn = () => {
       validationSchema={SignInFormSchema}
       onSubmit={handleSubmit}
     >
-      <SignInForm />
+      <SignInForm loading={loading} />
     </Formik>
   );
 };
