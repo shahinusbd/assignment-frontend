@@ -32,7 +32,6 @@ export function SignInForm() {
                 </span>
               </div>
               <div>
-                {/* Use Formik's Field component with the InputText */}
                 <Field name="email">
                   {({ field }: { field: FieldProps["field"] }) => (
                     <InputText
@@ -56,7 +55,6 @@ export function SignInForm() {
                 </span>
               </div>
               <div className="w-full">
-                {/* Use Formik's Field component with the Password */}
                 <Field name="password">
                   {({ field }: { field: FieldProps["field"] }) => (
                     <Password

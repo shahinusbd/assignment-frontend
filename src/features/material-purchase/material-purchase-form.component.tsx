@@ -1,20 +1,20 @@
-import { useState } from "react";
-import { Form } from "formik";
+import { ErrorMessage, Field, FieldProps, Form } from "formik";
 import { Button } from "primereact/button";
-import { InputText } from "primereact/inputtext";
 import { Calendar } from "primereact/calendar";
+import { InputText } from "primereact/inputtext";
+import { useState } from "react";
 import { FaCirclePlus } from "react-icons/fa6";
 import { HiOutlineTrash } from "react-icons/hi2";
 export const MaterialPurchaseForm = () => {
   // State to manage form rows
   const [rows, setRows] = useState([
     {
-      item: "",
+      line_item_name: "",
       store: "",
-      runner: "",
+      runners_name: "",
       amount: "",
-      cardNumber: "",
-      transactionDate: null,
+      card_number: "",
+      transaction_date: null,
     },
   ]);
 
@@ -23,12 +23,12 @@ export const MaterialPurchaseForm = () => {
     setRows([
       ...rows,
       {
-        item: "",
+        line_item_name: "",
         store: "",
-        runner: "",
+        runners_name: "",
         amount: "",
-        cardNumber: "",
-        transactionDate: null,
+        card_number: "",
+        transaction_date: null,
       },
     ]);
   };
@@ -36,14 +36,6 @@ export const MaterialPurchaseForm = () => {
   // Handler to delete a row
   const deleteRow = (index: number) => {
     const updatedRows = rows.filter((_, i) => i !== index);
-    setRows(updatedRows);
-  };
-
-  // Handler to update row data
-  const handleInputChange = (index: number, field: any, value: any) => {
-    const updatedRows = rows.map((row, i) =>
-      i === index ? { ...row, [field]: value } : row
-    );
     setRows(updatedRows);
   };
 
@@ -69,76 +61,117 @@ export const MaterialPurchaseForm = () => {
           {rows.map((row, index) => (
             <tr key={index}>
               <td className="border border-gray-300 p-2">
-                <InputText
-                  placeholder="Item 1"
-                  className="w-full p-inputtext p-component"
-                  value={row.item}
-                  onChange={(e) =>
-                    handleInputChange(index, "item", e.target.value)
-                  }
+                <Field
+                  name={`material_purchase[${index}].line_item_name`}
                   required
+                >
+                  {({ field }: { field: FieldProps["field"] }) => (
+                    <InputText
+                      {...field}
+                      className="w-full p-inputtext p-component"
+                    />
+                  )}
+                </Field>
+                <ErrorMessage
+                  name={`material_purchase[${index}].line_item_name`}
+                  component="div"
+                  className="text-red-600"
                 />
               </td>
 
               <td className="border border-gray-300 p-2">
-                <InputText
-                  placeholder="Construction"
-                  className="w-full p-inputtext p-component"
-                  value={row.store}
-                  onChange={(e) =>
-                    handleInputChange(index, "store", e.target.value)
-                  }
+                <Field
+                  name={`material_purchase[${index}].store`}
                   required
+                >
+                  {({ field }: { field: FieldProps["field"] }) => (
+                    <InputText
+                      {...field}
+                      className="w-full p-inputtext p-component"
+                    />
+                  )}
+                </Field>
+                <ErrorMessage
+                  name={`material_purchase[${index}].store`}
+                  component="div"
+                  className="text-red-600"
                 />
               </td>
 
               <td className="border border-gray-300 p-2">
-                <InputText
-                  placeholder="Alex Mershel"
-                  className="w-full p-inputtext p-component"
-                  value={row.runner}
-                  onChange={(e) =>
-                    handleInputChange(index, "runner", e.target.value)
-                  }
+                <Field
+                  name={`material_purchase[${index}].runners_name`}
                   required
+                >
+                  {({ field }: { field: FieldProps["field"] }) => (
+                    <InputText
+                      {...field}
+                      className="w-full p-inputtext p-component"
+                    />
+                  )}
+                </Field>
+                <ErrorMessage
+                  name={`material_purchase[${index}].runners_name`}
+                  component="div"
+                  className="text-red-600"
                 />
               </td>
 
               <td className="border border-gray-300 p-2">
-                <InputText
-                  placeholder="$100"
-                  className="w-full p-inputtext p-component"
-                  value={row.amount}
-                  onChange={(e) =>
-                    handleInputChange(index, "amount", e.target.value)
-                  }
+                <Field
+                  name={`material_purchase[${index}].amount`}
                   required
+                >
+                  {({ field }: { field: FieldProps["field"] }) => (
+                    <InputText
+                      {...field}
+                      className="w-full p-inputtext p-component"
+                    />
+                  )}
+                </Field>
+                <ErrorMessage
+                  name={`material_purchase[${index}].amount`}
+                  component="div"
+                  className="text-red-600"
                 />
               </td>
 
               <td className="border border-gray-300 p-2">
-                <InputText
-                  placeholder="12311"
-                  className="w-full p-inputtext p-component"
-                  value={row.cardNumber}
-                  onChange={(e) =>
-                    handleInputChange(index, "cardNumber", e.target.value)
-                  }
+                <Field
+                  name={`material_purchase[${index}].card_number`}
                   required
+                >
+                  {({ field }: { field: FieldProps["field"] }) => (
+                    <InputText
+                      {...field}
+                      className="w-full p-inputtext p-component"
+                    />
+                  )}
+                </Field>
+                <ErrorMessage
+                  name={`material_purchase[${index}].card_number`}
+                  component="div"
+                  className="text-red-600"
                 />
               </td>
 
               <td className="border border-gray-300 p-2">
-                <Calendar
-                  showIcon
-                  dateFormat="dd/mm/yy"
-                  placeholder="Select Date"
-                  className="w-full"
-                  value={row.transactionDate}
-                  onChange={(e) =>
-                    handleInputChange(index, "transactionDate", e.value)
-                  }
+                <Field
+                  /* name={`material_purchase[${index}].transaction_date`} */
+                  name={`transaction_date`}
                   required
+                >
+                  {({ field }: { field: FieldProps["field"] }) => (
+                    <Calendar
+                      {...field}
+                      dateFormat="mm/dd/yy"
+                    />
+                  )}
+                </Field>
+                <ErrorMessage
+                  name={`material_purchase[${index}].transaction_date`}
+                  component="div"
+                  className="text-red-600"
                 />
               </td>
 
@@ -173,6 +206,7 @@ export const MaterialPurchaseForm = () => {
       <div className="flex justify-end">
         {" "}
         <Button
+          type="submit"
           label="Save"
           className="mt-3 bg-[#2563EB] text-white w-[113px] h-[46px]"
         />

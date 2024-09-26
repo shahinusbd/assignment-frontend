@@ -3,12 +3,7 @@ import { Formik, FormikHelpers } from "formik";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
-import {
-  InitialValue,
-  SignInCreate,
-  SignInCreateResponse,
-  SignInFormSchema,
-} from "./form.config";
+import { InitialValue, SignInCreate, SignInFormSchema } from "./form.config";
 import { SignInForm } from "./signin-form.component";
 
 export const SignIn = () => {
@@ -26,25 +21,20 @@ export const SignIn = () => {
         values
       );
 
-      console.log("response: " + JSON.stringify(response));
-
       // Check if the response has an accessToken and redirect to the dashboard
-      if (response?.data) {
+      if (response?.data?.status_code === "1") {
         localStorage.setItem("access_token", response?.data.access_token);
         localStorage.setItem("email", response?.data?.user_data?.email);
 
+        toast.success(response?.data?.status_message);
         // Redirect to the dashboard page
         push("/dashboard");
       } else {
-        toast.error("An error occurred. Please try again.");
+        toast.error(response?.data?.status_message);
       }
     } catch (error: any) {
-      // Handle API errors
-      if (error.response?.data?.status_message) {
-        toast.error(error.response.data.status_message);
-      } else {
-        toast.error("An error occurred. Please try again.");
-      }
+      toast.error("An error occurred while submitting the form.");
+      setErrors({ email: error?.response?.data?.message });
     } finally {
       setSubmitting(false); // Stop the submit spinner/loading state
     }

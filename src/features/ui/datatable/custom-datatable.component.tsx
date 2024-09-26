@@ -1,12 +1,12 @@
 import React from "react";
 
 interface Product {
-  item: string;
+  line_item_name: string;
   store: string;
-  runner: string;
+  runners_name: string;
   amount: string;
-  cardNo: string;
-  date: string;
+  card_number: string;
+  transaction_date: string;
 }
 
 interface Column {
@@ -50,7 +50,10 @@ export const CustomDataTable: React.FC<CustomDataTableProps> = ({
           <thead>
             <tr className="bg-[#2563EB99] text-[#FFFFFF]">
               {columns.map((column, index) => (
-                <th key={index} className="p-3 border">
+                <th
+                  key={index}
+                  className="p-3 border"
+                >
                   {column.label}
                 </th>
               ))}
@@ -63,7 +66,10 @@ export const CustomDataTable: React.FC<CustomDataTableProps> = ({
                 className={rowIndex % 2 === 0 ? "bg-gray-100" : ""}
               >
                 {columns.map((column, colIndex) => (
-                  <td key={colIndex} className="p-3 border">
+                  <td
+                    key={colIndex}
+                    className="p-3 border"
+                  >
                     {product[column.field]}
                   </td>
                 ))}
