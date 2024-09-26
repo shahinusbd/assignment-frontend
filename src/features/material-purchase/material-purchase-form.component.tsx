@@ -190,17 +190,7 @@ export const MaterialPurchaseForm = () => {
       <div className="flex justify-end rounded shadow-lg">
         <FaCirclePlus
           onClick={addRow}
-          style={{
-            height: "26.63px",
-            width: "26.63px",
-            cursor: "pointer",
-            backgroundColor: "#F7F9FC",
-            borderRadius: "50%",
-            border: "1px solid #E2E8F0",
-            color: "#2563EB",
-            marginRight: 10,
-            marginBottom: 10,
-          }}
+          className="h-[26.63px] w-[26.63px] cursor-pointer bg-[#F7F9FC] rounded-full border border-[#E2E8F0] text-[#2563EB] mr-2.5 mb-2.5"
         />
       </div>
       <div className="flex justify-end">

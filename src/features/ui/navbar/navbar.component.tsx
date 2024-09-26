@@ -13,22 +13,7 @@ export const Navbar = () => {
         </div>
 
         <MdLogout
-          style={{
-            color: "#545454",
-            cursor: "pointer",
-            fontSize: "24px",
-            marginTop: "40px",
-            padding: "0",
-            backgroundColor: "transparent",
-            border: "none",
-            outline: "none",
-            position: "relative",
-            top: "-2px",
-            left: "-20px",
-            borderRadius: "50%",
-            transition: "transform 0.2s ease-in-out",
-            transform: "scale(1)",
-          }}
+          className="text-gray-600 cursor-pointer text-2xl mt-10 p-0 bg-transparent border-none outline-none relative -top-0.5 -left-5 rounded-full transition-transform duration-200 ease-in-out transform scale-100"
           onClick={() => {
             localStorage.clear();
             window.location.href = "/";
