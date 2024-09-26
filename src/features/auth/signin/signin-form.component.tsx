@@ -15,7 +15,7 @@ export function SignInForm({ loading }: SignInCreate) {
         <BackgroundComponent />
       </div>
 
-      <Form className="col-span-1 flex items-center  p-6 md:p-20">
+      <Form className="col-span-1 flex items-center justify-left p-6 md:p-20">
         <div className="w-full max-w-md">
           <h1 className="font-bold text-[#090914] text-3xl md:text-5xl">
             Welcome Back!
