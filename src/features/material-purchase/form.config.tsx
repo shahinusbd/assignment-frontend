@@ -36,7 +36,7 @@ export const InitialValue: MaterialPurchaseCreate = {
       runners_name: "",
       amount: 0,
       card_number: "",
-      transaction_date: "08-28-2024",
+      transaction_date: "",
     },
   ],
 };

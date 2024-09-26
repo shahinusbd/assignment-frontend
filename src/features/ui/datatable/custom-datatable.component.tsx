@@ -63,12 +63,12 @@ export const CustomDataTable: React.FC<CustomDataTableProps> = ({
             {data.map((product, rowIndex) => (
               <tr
                 key={rowIndex}
-                className={rowIndex % 2 === 0 ? "bg-gray-100" : ""}
+                className={rowIndex % 2 === 0 ? "bg-[#2563EB1A]" : ""}
               >
                 {columns.map((column, colIndex) => (
                   <td
                     key={colIndex}
-                    className="p-3 border"
+                    className="p-3 border border-white"
                   >
                     {product[column.field]}
                   </td>

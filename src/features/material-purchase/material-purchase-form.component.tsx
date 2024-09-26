@@ -1,4 +1,5 @@
-import { ErrorMessage, Field, FieldProps, Form } from "formik";
+import { ErrorMessage, Field, FieldProps, Form, FormikProps } from "formik";
+import moment from "moment";
 import { Button } from "primereact/button";
 import { Calendar } from "primereact/calendar";
 import { InputText } from "primereact/inputtext";
@@ -157,14 +158,33 @@ export const MaterialPurchaseForm = () => {
 
               <td className="border border-gray-300 p-2">
                 <Field
-                  /* name={`material_purchase[${index}].transaction_date`} */
-                  name={`transaction_date`}
+                  name={`material_purchase[${index}].transaction_date`}
                   required
                 >
-                  {({ field }: { field: FieldProps["field"] }) => (
+                  {({
+                    field,
+                    form,
+                  }: {
+                    field: FieldProps["field"];
+                    form: FormikProps<any>;
+                  }) => (
                     <Calendar
                       {...field}
                       dateFormat="mm/dd/yy"
+                      value={
+                        field.value
+                          ? moment(field.value, "MM-DD-YYYY").toDate()
+                          : null
+                      } // Display the date correctly
+                      formatDateTime={(d) => moment(d).format("MM-DD-YYYY")} // Format for display
+                      onChange={(date) => {
+                        if (date) {
+                          const formattedDate = moment(date as any).format(
+                            "MM-DD-YYYY"
+                          ); // Format to MM-DD-YYYY
+                          form.setFieldValue(field.name, formattedDate); // Set formatted date in the form
+                        }
+                      }}
                     />
                   )}
                 </Field>
