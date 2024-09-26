@@ -2,7 +2,6 @@ import { ErrorMessage, Field, FieldProps, Form } from "formik"; // Import Field 
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
-import BackgroundComponent from "./background-component";
 
 interface SignInCreate {
   loading: boolean;
@@ -10,18 +9,23 @@ interface SignInCreate {
 
 export function SignInForm({ loading }: SignInCreate) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen">
-      <div className="bg-[#2563EB] w-[79%] h-64 md:h-full">
-        <BackgroundComponent />
+    <div className="grid grid-cols-1 md:grid-cols-[40%_60%] min-h-screen">
+      <div className="bg-[#2563EB] w-full h-64 md:h-full">
+        <img
+          src="login-image.png"
+          alt="logo"
+          className="object-cover w-full h-full"
+        />
       </div>
 
       <Form className="col-span-1 flex items-center justify-left p-6 md:p-20">
-        <div className="w-full max-w-md">
+        <div className="w-full max-w-md mx-auto ml-14">
           <h1 className="font-bold text-[#090914] text-3xl md:text-5xl">
             Welcome Back!
           </h1>
           <p className="text-[#52525B] pt-4 md:pt-6 text-sm md:text-base">
-            Clarity gives you the blocks and components you <br />
+            Clarity gives you the blocks and components you{" "}
+            <br className="hidden md:block" />
             need to create a truly professional website.
           </p>
           <div className="pt-10 md:pt-28">

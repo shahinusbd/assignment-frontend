@@ -28,10 +28,9 @@ export const SignIn = () => {
       if (response?.data?.status_code === "1") {
         localStorage.setItem("access_token", response?.data.access_token);
         localStorage.setItem("email", response?.data?.user_data?.email);
-
-        toast.success(response?.data?.status_message);
         // Redirect to the dashboard page
         push("/dashboard");
+        toast.success(response?.data?.status_message);
       } else {
         toast.error(response?.data?.status_message);
       }
