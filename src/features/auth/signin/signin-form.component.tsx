@@ -1,7 +1,8 @@
-import { ErrorMessage, Field, FieldProps, Form } from "formik";
+import { ErrorMessage, Field, FieldProps, Form } from "formik"; // Import Field and ErrorMessage from Formik
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
 import { Password } from "primereact/password";
+import BackgroundComponent from "./background-component";
 
 interface SignInCreate {
   loading: boolean;
@@ -9,106 +10,64 @@ interface SignInCreate {
 
 export function SignInForm({ loading }: SignInCreate) {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen">
-      {/* Sidebar Section */}
-      <div className="bg-[#2563EB] w-full h-full flex items-center justify-center p-6">
-        <div className="text-white text-center">
-          <h1 className="font-bold text-4xl lg:text-5xl mb-4">
-            Welcome to our community
-          </h1>
-          <p className="mb-8">
-            Clarity gives you the blocks & components you need to create a truly
-            professional website.
-          </p>
-          <div className="flex justify-center items-center space-x-2">
-            <span className="text-yellow-400 text-xl">★★★★★</span>
-            <p>
-              "We love Landingfolio! Our designers were using it for their
-              projects, so we already knew what kind of design they want."
-            </p>
-          </div>
-          <div className="mt-6">
-            <div className="flex justify-center items-center space-x-2">
-              <img
-                src="https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250"
-                alt="Devon Lane"
-                className="w-10 h-10 rounded-full"
-              />
-              <div>
-                <p>Devon Lane</p>
-                <span>Co-Founder, Design.co</span>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen">
+      <div className="bg-[#2563EB] w-[79%] h-64 md:h-full">
+        <BackgroundComponent />
       </div>
 
-      {/* Form Section */}
-      <Form className="flex flex-col justify-center px-10 py-20 lg:ml-[-100px]">
-        <div className="w-full max-w-md mx-auto">
-          <h1 className="font-bold text-[#090914] text-5xl mb-6">
+      <Form className="col-span-1 flex items-center  p-6 md:p-20">
+        <div className="w-full max-w-md">
+          <h1 className="font-bold text-[#090914] text-3xl md:text-5xl">
             Welcome Back!
           </h1>
-          <p className="text-[#52525B] mb-10">
-            Clarity gives you the blocks and components you need to create a
-            truly professional website.
+          <p className="text-[#52525B] pt-4 md:pt-6 text-sm md:text-base">
+            Clarity gives you the blocks and components you <br />
+            need to create a truly professional website.
           </p>
-
-          {/* Email Field */}
-          <div className="mb-6">
-            <label
-              className="block text-[#090914] mb-2"
-              htmlFor="email"
-            >
-              Email address
-            </label>
-            <Field name="email">
-              {({ field }: { field: FieldProps["field"] }) => (
-                <InputText
-                  {...field}
-                  id="email"
-                  className="p-inputtext-md w-full h-[60px] py-2"
-                />
-              )}
-            </Field>
-            <ErrorMessage
-              name="email"
-              component="div"
-              className="text-red-600"
-            />
+          <div className="pt-10 md:pt-28">
+            <div>
+              <label className="text-[#090914] block">Email address</label>
+              <Field name="email">
+                {({ field }: { field: FieldProps["field"] }) => (
+                  <InputText
+                    {...field}
+                    className="p-inputtext-md py-2 mt-2 w-full h-[50px]"
+                    id="email"
+                  />
+                )}
+              </Field>
+              <ErrorMessage
+                name="email"
+                component="div"
+                className="text-red-600"
+              />
+            </div>
+            <div className="mt-6">
+              <label className="text-[#090914] block">Password</label>
+              <Field name="password">
+                {({ field }: { field: FieldProps["field"] }) => (
+                  <Password
+                    {...field}
+                    className="mt-2 w-full h-[50px]"
+                    id="password"
+                  />
+                )}
+              </Field>
+              <ErrorMessage
+                name="password"
+                component="div"
+                className="text-red-600"
+              />
+            </div>
+            <div className="pt-10 md:pt-14">
+              <Button
+                type="submit"
+                label="Sign In"
+                className="w-full md:w-[160px] h-[50px] bg-blue-600 text-white"
+                loading={loading}
+              />
+            </div>
           </div>
-
-          {/* Password Field */}
-          <div className="mb-6">
-            <label
-              className="block text-[#090914] mb-2"
-              htmlFor="password"
-            >
-              Password
-            </label>
-            <Field name="password">
-              {({ field }: { field: FieldProps["field"] }) => (
-                <Password
-                  {...field}
-                  id="password"
-                  className="w-full h-[60px] py-2"
-                />
-              )}
-            </Field>
-            <ErrorMessage
-              name="password"
-              component="div"
-              className="text-red-600"
-            />
-          </div>
-
-          {/* Sign In Button */}
-          <Button
-            type="submit"
-            label="Sign In"
-            className="w-full h-[55px] bg-blue-600 text-white"
-            loading={loading}
-          />
         </div>
       </Form>
     </div>
