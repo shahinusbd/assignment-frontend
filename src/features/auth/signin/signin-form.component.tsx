@@ -1,79 +1,144 @@
-import { ErrorMessage, Field, FieldProps, Form } from "formik"; // Import Field and ErrorMessage from Formik
-import { Button } from "primereact/button";
-import { InputText } from "primereact/inputtext";
-import { Password } from "primereact/password";
+"use client";
+
+import { ErrorMessage, Field, Form, Formik } from "formik";
+import { Eye, EyeOff } from "lucide-react";
+import { useState } from "react";
+
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { SignInFormSchema } from "./form.config";
 
 interface SignInCreate {
   loading: boolean;
 }
 
 export function SignInForm({ loading }: SignInCreate) {
+  const [showPassword, setShowPassword] = useState(false);
+
   return (
-    <div className="grid grid-cols-1 md:grid-cols-[40%_60%] min-h-screen">
-      <div className="bg-[#2563EB] w-full h-64 md:h-full">
+    <div className="grid min-h-screen grid-cols-1 lg:grid-cols-[45%_55%] transition-all duration-300 ease-in-out">
+      <div className="bg-[#a0c5ff] w-full h-48 sm:h-64 lg:h-full relative overflow-hidden">
         <img
-          src="login-image.png"
-          alt="logo"
-          className="object-cover w-full h-full"
+          src="https://img.freepik.com/free-photo/logistics-transportation-container-cargo-ship-cargo-plane-with-working-crane-bridge-shipyard-sunrise-logistic-import-export-transport-industry-background-ai-generative_123827-24177.jpg?t=st=1728383386~exp=1728386986~hmac=a0180fdde1c458bcadd58f1bae8b130bb7dda64da9a73acc0ad599ed76447d3e&w=1380"
+          alt="Login background"
+          style={{ objectFit: "cover" }}
+          className="w-full h-full transition-transform duration-300 ease-in-out transform hover:scale-105"
         />
+        {/*  <div className="absolute bottom-20 right-70 p-4">
+          <h1 className="text-white text-2xl md:text-4xl font-bold">
+            Logistics System
+          </h1>
+        </div> */}
       </div>
 
-      <Form className="col-span-1 flex items-center justify-left p-6 md:p-20">
-        <div className="w-full max-w-md mx-auto ml-14">
-          <h1 className="font-bold text-[#090914] text-3xl md:text-5xl">
-            Welcome Back!
-          </h1>
-          <p className="text-[#52525B] pt-4 md:pt-6 text-sm md:text-base">
-            Clarity gives you the blocks and components you{" "}
-            <br className="hidden md:block" />
-            need to create a truly professional website.
-          </p>
-          <div className="pt-10 md:pt-28">
-            <div>
-              <label className="text-[#090914] block">Email address</label>
-              <Field name="email">
-                {({ field }: { field: FieldProps["field"] }) => (
-                  <InputText
-                    {...field}
-                    className="p-inputtext-md py-2 mt-2 w-full h-[50px]"
-                    id="email"
+      <Formik
+        initialValues={{ email: "", password: "" }}
+        validationSchema={SignInFormSchema}
+        onSubmit={(values) => {
+          // Handle form submission
+          console.log(values);
+        }}
+      >
+        {({ errors, touched }) => (
+          <Form className="flex items-center justify-center p-6 lg:p-20">
+            <div className="w-full max-w-md space-y-8 animate-fadeIn">
+              <div className="text-center lg:text-left">
+                <h1 className="font-bold text-3xl sm:text-4xl lg:text-5xl transition-all duration-300 ease-in-out">
+                  Welcome Back!
+                </h1>
+                <p className="text-muted-foreground mt-4 text-sm sm:text-base transition-all duration-300 ease-in-out">
+                  Clarity gives you the blocks and components you need to create
+                  a truly professional website.
+                </p>
+              </div>
+              <div className="space-y-6">
+                <div className="space-y-2">
+                  <Label
+                    htmlFor="email"
+                    className="text-sm sm:text-base transition-all duration-300 ease-in-out"
+                  >
+                    Email address
+                  </Label>
+                  <Field name="email">
+                    {({ field }: { field: any }) => (
+                      <Input
+                        {...field}
+                        id="email"
+                        type="email"
+                        placeholder="Enter your email"
+                        className={`transition-all duration-300 ease-in-out ${
+                          errors.email && touched.email
+                            ? "border-destructive"
+                            : ""
+                        }`}
+                      />
+                    )}
+                  </Field>
+                  <ErrorMessage
+                    name="email"
+                    component="div"
+                    className="text-destructive text-sm animate-fadeIn"
                   />
-                )}
-              </Field>
-              <ErrorMessage
-                name="email"
-                component="div"
-                className="text-red-600"
-              />
-            </div>
-            <div className="mt-6">
-              <label className="text-[#090914] block">Password</label>
-              <Field name="password">
-                {({ field }: { field: FieldProps["field"] }) => (
-                  <Password
-                    {...field}
-                    className="mt-2 w-full h-[50px]"
-                    id="password"
+                </div>
+                <div className="space-y-2">
+                  <Label
+                    htmlFor="password"
+                    className="text-sm sm:text-base transition-all duration-300 ease-in-out"
+                  >
+                    Password
+                  </Label>
+                  <div className="relative">
+                    <Field name="password">
+                      {({ field }: { field: any }) => (
+                        <Input
+                          {...field}
+                          id="password"
+                          type={showPassword ? "text" : "password"}
+                          placeholder="Enter your password"
+                          className={`pr-10 transition-all duration-300 ease-in-out ${
+                            errors.password && touched.password
+                              ? "border-destructive"
+                              : ""
+                          }`}
+                        />
+                      )}
+                    </Field>
+                    <Button
+                      type="button"
+                      variant="ghost"
+                      size="icon"
+                      className="absolute right-2 top-1/2 -translate-y-1/2 transition-all duration-300 ease-in-out hover:bg-transparent"
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
+                      {showPassword ? (
+                        <EyeOff className="h-4 w-4" />
+                      ) : (
+                        <Eye className="h-4 w-4" />
+                      )}
+                      <span className="sr-only">
+                        Toggle password visibility
+                      </span>
+                    </Button>
+                  </div>
+                  <ErrorMessage
+                    name="password"
+                    component="div"
+                    className="text-destructive text-sm animate-fadeIn"
                   />
-                )}
-              </Field>
-              <ErrorMessage
-                name="password"
-                component="div"
-                className="text-red-600"
-              />
+                </div>
+                <Button
+                  type="submit"
+                  className="w-full transition-all duration-300 ease-in-out transform hover:scale-105"
+                  disabled={loading}
+                >
+                  {loading ? "Signing In..." : "Sign In"}
+                </Button>
+              </div>
             </div>
-            <div className="pt-10 md:pt-14">
-              <Button
-                type="submit"
-                label="Sign In"
-                className="w-full md:w-[160px] h-[50px] bg-blue-600 text-white"
-                loading={loading}
-              />
-            </div>
-          </div>
-        </div>
-      </Form>
+          </Form>
+        )}
+      </Formik>
     </div>
   );
 }
