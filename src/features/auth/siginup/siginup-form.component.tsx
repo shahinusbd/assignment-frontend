@@ -1,16 +1,15 @@
+import { CustomInputField } from "@/components/common/CustomInputField";
 import { Button } from "@/components/ui/button";
 import { Form } from "formik";
 import { Facebook, Github } from "lucide-react";
+import Link from "next/link";
 import { useState } from "react";
 
-import { CustomInputField } from "@/components/common/CustomInputField";
-import Link from "next/link";
-
-interface SignInCreate {
+interface SignUpCreate {
   loading: boolean;
 }
 
-export function SignInForm({ loading }: SignInCreate) {
+export function SignUpForm({ loading }: SignUpCreate) {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
@@ -34,7 +33,7 @@ export function SignInForm({ loading }: SignInCreate) {
           ))}
         </div>
 
-        <div className="relative mx-auto max-w-md pt-32">
+        <div className="relative w-5/12 mx-auto pt-12 mr-32">
           <div className="rounded-2xl bg-white/10 backdrop-blur-lg p-6 space-y-6 shadow-xl">
             <div className="text-center">
               <img
@@ -46,31 +45,83 @@ export function SignInForm({ loading }: SignInCreate) {
 
             <div className="space-y-4">
               <h2 className="text-2xl font-bold text-white text-center">
-                Welcome back!
+                Create an account
               </h2>
 
+              <div className="grid grid-cols-2 gap-4">
+                <CustomInputField
+                  label="First name"
+                  name="firstName"
+                  type="text"
+                  placeholder="First name"
+                />
+                <CustomInputField
+                  label="Last name"
+                  name="lastName"
+                  type="text"
+                  placeholder="Last name"
+                />
+              </div>
+
               <CustomInputField
-                label="Email"
+                label="Email or phone number"
                 name="email"
                 type="email"
                 placeholder="name@example.com"
               />
+
               <CustomInputField
-                label="Password"
-                name="password"
-                type={showPassword ? "text" : "password"}
-                placeholder="••••••••"
+                label="Date of birth"
+                name="dateOfBirth"
+                type="date"
+                placeholder="MM/DD/YYYY"
               />
 
-              <Button
-                variant="link"
-                className="px-0 text-white/70 hover:text-white text-sm w-full text-right"
-              >
-                Forgot Password?
-              </Button>
+              <div className="grid grid-cols-2 gap-4">
+                <CustomInputField
+                  label="Password"
+                  name="password"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="••••••••"
+                />
+                <CustomInputField
+                  label="Confirm password"
+                  name="confirmPassword"
+                  type={showPassword ? "text" : "password"}
+                  placeholder="••••••••"
+                />
+              </div>
+
+              <div className="flex items-center">
+                <input
+                  type="checkbox"
+                  className="mr-2"
+                  id="terms"
+                  required
+                />
+                <label
+                  htmlFor="terms"
+                  className="text-white/70"
+                >
+                  I agree to all the{" "}
+                  <a
+                    href="#"
+                    className="text-blue-400 underline"
+                  >
+                    Terms
+                  </a>{" "}
+                  and{" "}
+                  <a
+                    href="#"
+                    className="text-blue-400 underline"
+                  >
+                    Privacy Policy
+                  </a>
+                </label>
+              </div>
 
               <Button className="w-full bg-blue-600 hover:bg-blue-700">
-                Sign in
+                Create account
               </Button>
             </div>
 
@@ -129,12 +180,12 @@ export function SignInForm({ loading }: SignInCreate) {
             </div>
 
             <div className="text-center text-sm">
-              <span className="text-white/70">Don't have an account yet? </span>
+              <span className="text-white/70">Already have an account? </span>
               <Link
-                href="/auth/signup"
+                href="/"
                 className="px-0 text-white font-medium hover:text-white/90 hover:underline"
               >
-                Register for free
+                Log in
               </Link>
             </div>
           </div>
