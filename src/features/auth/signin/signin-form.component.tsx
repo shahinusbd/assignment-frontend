@@ -61,13 +61,14 @@ export function SignInForm({ loading }: SignInCreate) {
                 type={showPassword ? "text" : "password"}
                 placeholder="••••••••"
               />
-
-              <Button
-                variant="link"
-                className="px-0 text-white/70 hover:text-white text-sm w-full text-right"
-              >
-                Forgot Password?
-              </Button>
+              <div className="pt-1">
+                <Link
+                  href="#"
+                  className="px-0 text-white/70 font-medium hover:text-white text-sm w-full text-right hover:underline"
+                >
+                  Forgot Password?
+                </Link>
+              </div>
 
               <Button className="w-full bg-blue-600 hover:bg-blue-700">
                 Sign in
