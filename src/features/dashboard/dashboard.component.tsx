@@ -10,7 +10,7 @@ export const DashBoard = () => {
   useEffect(() => {
     // Ensure this runs only on the client side
     if (typeof window !== "undefined") {
-      const token = localStorage.getItem("access_token");
+      const token = localStorage.getItem("token");
 
       // If no token is present, redirect to the login page
       if (!token) {

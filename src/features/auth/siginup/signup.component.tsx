@@ -1,6 +1,6 @@
 import { Formik, FormikHelpers } from "formik";
 
-import { CreateSignUp } from "@/features/api/auth-endpoint";
+import { Register } from "@/features/api/auth-endpoint";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -20,13 +20,22 @@ export const SignUp = () => {
     try {
       setLoading(true); // Start the submit spinner/loading state
       // Send a POST request to the login endpoint
-      const response = await axios.post<any>(CreateSignUp, {
-        email: values.email,
-        password: values.password,
-        first_name: values.firstName,
-        last_name: values.lastName,
-        date_of_birth: values.dateOfBirth,
-      });
+      const response = await axios.post<any>(
+        Register,
+        {
+          email: values.email,
+          password: values.password,
+          first_name: values.firstName,
+          last_name: values.lastName,
+          date_of_birth: values.dateOfBirth,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true, // If your backend uses cookies
+        }
+      );
 
       // Check if the response has an accessToken and redirect to the dashboard
       if (response?.data?.status_code === "1") {

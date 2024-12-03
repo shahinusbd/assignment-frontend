@@ -1,3 +1,5 @@
 const AuthService = "http://localhost:5000/api/auth/";
 
-export const CreateSignUp = AuthService + "register";
+export const Register = AuthService + "register";
+
+export const Login = AuthService + "login";

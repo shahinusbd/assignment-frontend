@@ -1,5 +1,6 @@
 import { Formik, FormikHelpers } from "formik";
 
+import { Login } from "@/features/api/auth-endpoint";
 import axios from "axios";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -19,15 +20,12 @@ export const SignIn = () => {
     try {
       setLoading(true); // Start the submit spinner/loading state
       // Send a POST request to the login endpoint
-      const response = await axios.post<any>(
-        "https://devapi.propsoft.ai/api/interview/login",
-        values
-      );
+      const response = await axios.post<any>(Login, values);
 
       // Check if the response has an accessToken and redirect to the dashboard
-      if (response?.data?.status_code === "1") {
-        localStorage.setItem("access_token", response?.data.access_token);
-        localStorage.setItem("email", response?.data?.user_data?.email);
+      if (response?.status === 200) {
+        localStorage.setItem("token", response?.data?.token);
+        localStorage.setItem("email", response?.data);
         // Redirect to the dashboard page
         push("/dashboard");
         toast.success(response?.data?.status_message);
